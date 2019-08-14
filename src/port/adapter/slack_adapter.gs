@@ -41,22 +41,6 @@ SlackAdapter.prototype.fetchMessages = function(channelId, fromDate, toDate) {
 }
 
 
-SlackAdapter.prototype.fetchGroupMessages = function(channelId, fromDate, toDate) {  
-  log_trace('SlackAdapter.fetchGroupMessages start');
-
-  var url = Utilities.formatString(
-    "https://slack.com/api/groups.history?token=%s&channel=%s&oldest=%s&latest=%s&count=%s",
-    this.botToken, channelId, toUnixtime(fromDate), toUnixtime(toDate), this.MESSAGES_COUNT);
-
-  log_trace("request url:" + url); 
-  var res = UrlFetchApp.fetch(url);
-  var json = JSON.parse(res);
-
-  log_trace('SlackAdapter.fetchGroupMessages end');
-  return json.messages;
-}
-
-
 /*
  * Slack bot apiを利用してメッセージを投稿します。
  *
@@ -129,19 +113,14 @@ function test_SlackAdapter() {
   LOG_LEVEL = LOG_LEVEL_TRACE;
 
   var botToken = ScriptProperties.getProperty('SlackBotToken');
-/*
   try {
     new SlackAdapter();
     throw new Error('fail');
   } catch(e) { log_debug('error message:' + e); }
-*/
-// https://suwa-sh.slack.com/messages/CAH84NHPZ
+
   var adapter = new SlackAdapter(botToken);
-  var members = adapter.fetchMembers();
-  // TODO sheetに反映するまでには、id -> name 変換したい
   
-//  var channelId = 'CBYRTHRL2'; // #random
-  var channelId = 'CAH84NHPZ'; // #tweet_to_me
+  var channelId = 'CAH84NHPZ';
   var resMessages = adapter.fetchMessages(channelId, new Date('2019-01-01'), new Date('2019-08-15'));
   
   log_trace(resMessages);

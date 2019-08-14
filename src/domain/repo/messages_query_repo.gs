@@ -48,9 +48,7 @@ function test_MessagesQueryRepo() {
   LOG_LEVEL = LOG_LEVEL_DEBUG;
 
   var botToken = ScriptProperties.getProperty('SlackBotToken');
-//  var channelId = 'CBYRTHRL2'; // #random
-//  var channelId = 'GF10NQT8R'; // #private_test
-  var channelId = 'CAH84NHPZ'; // #tweet_to_me
+  var channelId = 'CAH84NHPZ';
   
   var query = new MessagesQueryRepo(botToken, channelId);
   var messages = query.findMessages(new Date('2019-01-01'), new Date('2019-08-15'));

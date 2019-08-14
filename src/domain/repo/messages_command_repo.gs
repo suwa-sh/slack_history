@@ -143,10 +143,7 @@ function test_MessagesCommandRepo() {
   LOG_LEVEL = LOG_LEVEL_DEBUG;
 
   var token = ScriptProperties.getProperty('SlackBotToken');
-  var channelId = 'CAFEVPZ0Q' // #feed-it
-//  var channelId = 'GF10NQT8R'; // #private_test
-//  var channelId = 'CBYRTHRL2'; // #random
-//  var channelId = 'CAH84NHPZ'; // #tweet_to_me
+  var channelId = 'CAFEVPZ0Q'
   
   var messagesQuery = new MessagesQueryRepo(token, channelId);
   var messages = messagesQuery.findMessages(new Date('2019-08-14'), new Date('2019-08-15'));
