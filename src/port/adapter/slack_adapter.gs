@@ -109,7 +109,7 @@ SlackAdapter.prototype.postImage = function(channel, title, image, message) {
 //--------------------------------------------------------------------------------------------------
 // test
 //--------------------------------------------------------------------------------------------------
-function test_SlackAdapter() {
+function test_SlackAdapter_fetchMessages() {
   LOG_LEVEL = LOG_LEVEL_TRACE;
 
   var botToken = ScriptProperties.getProperty('SlackBotToken');
@@ -122,6 +122,17 @@ function test_SlackAdapter() {
   
   var channelId = 'CAH84NHPZ';
   var resMessages = adapter.fetchMessages(channelId, new Date('2019-01-01'), new Date('2019-08-15'));
+  
+  log_trace(resMessages);
+}
+
+function test_SlackAdapter_fetchMembers() {
+  LOG_LEVEL = LOG_LEVEL_TRACE;
+
+  var botToken = ScriptProperties.getProperty('SlackBotToken');
+  var adapter = new SlackAdapter(botToken);
+  
+  var resMessages = adapter.fetchMembers();
   
   log_trace(resMessages);
 }

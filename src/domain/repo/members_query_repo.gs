@@ -21,7 +21,12 @@ MembersQueryRepo.prototype.parse = function(res) {
 }
 // slack-api/response/members/member -> Member
 MembersQueryRepo.prototype.parseMember = function(res) {
-  return new Member( res.id, res.name );
+  // nameの優先度: display_name > name > id
+  var name = res.profile.display_name;
+  if (isEmpty(name)) { name = res.name; } 
+  if (isEmpty(name)) { name = res.id; } 
+
+  return new Member(res.id, name);
 }
 
 
@@ -35,8 +40,6 @@ function test_MembersQueryRepo() {
   
   var query = new MembersQueryRepo(botToken);
   var members = query.findMembers();
-  
-  log_debug('messages.length: ' + members.length());
 
   var test_id = 'U4WGS3EFQ';
   log_debug(test_id + ' : ' + members.name(test_id));
