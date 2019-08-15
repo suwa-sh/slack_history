@@ -25,21 +25,35 @@ ReportService.prototype.report = function(command) {
 }
 
 ReportService.prototype._getStateMessage = function(timestamp, loadResponse) {
-  var message = '';
-  message += 'slackの履歴をspreadsheetに保存しました' + '\n';
-  message += '\n';
-  message += '```\n';
-  message += '- 開始日: ' + Utilities.formatDate(loadResponse.startDate, 'Asia/Tokyo', 'yyyy-MM-dd') + '\n';
-  message += '- 終了日: ' + Utilities.formatDate(loadResponse.endDate, 'Asia/Tokyo', 'yyyy-MM-dd') + '\n';
-  message += '- メッセージ数: ' + loadResponse.messageCount + '\n';
-  message += '　　- スター　　　: ' + loadResponse.starredCount + '\n';
-  message += '　　- ピン留め　　: ' + loadResponse.pinnedCount + '\n';
-  message += '　　- リアクション: ' + loadResponse.reactionCount + '\n';
-  message += '　　- 添付ファイル: ' + loadResponse.fileCount + '\n';
-  message += '```\n';
-  message += '\n';
-  message += SpreadsheetApp.getActive().getUrl() + '\n';
-  return message;
+  var startDate = Utilities.formatDate(loadResponse.startDate, 'Asia/Tokyo', 'yyyy-MM-dd');
+  var endDate = Utilities.formatDate(loadResponse.endDate, 'Asia/Tokyo', 'yyyy-MM-dd');
+  var messageCount = loadResponse.messageCount;
+
+  var result = '';
+  if (messageCount == 0) {
+    result += '保存するメッセージはありませんでした。' + '\n';
+    result += '\n';
+    result += '```\n';
+    result += '- 開始日: ' + startDate + '\n';
+    result += '- 終了日: ' + endDate + '\n';
+    result += '```\n';
+    return result;
+  }
+
+  result += 'slackの履歴をspreadsheetに保存しました。' + '\n';
+  result += '\n';
+  result += '```\n';
+  result += '- 開始日: ' + startDate + '\n';
+  result += '- 終了日: ' + endDate + '\n';
+  result += '- メッセージ数: ' + messageCount + '\n';
+  result += '　　- スター　　　: ' + loadResponse.starredCount + '\n';
+  result += '　　- ピン留め　　: ' + loadResponse.pinnedCount + '\n';
+  result += '　　- リアクション: ' + loadResponse.reactionCount + '\n';
+  result += '　　- 添付ファイル: ' + loadResponse.fileCount + '\n';
+  result += '```\n';
+  result += '\n';
+  result += SpreadsheetApp.getActive().getUrl() + '\n';
+  return result;
 }
 
 
