@@ -31,6 +31,8 @@ var Message = function(
 
   // files
   for (var idx in files) {
+    // 削除された添付ファイルをスキップ
+    if (files[idx].mode != 'hosted') { continue; }
     var file = new File(files[idx].name, files[idx].mimetype, files[idx].url_private, files[idx].permalink);
     this.files.push(file);
   }
