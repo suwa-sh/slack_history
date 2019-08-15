@@ -72,7 +72,7 @@ ReportService.prototype.errorReport = function(command) {
   notNull('command', command);
 
   var message = command.timestamp + ' ERROR ' + command.error.message + '\n';
-  if (! isNull(command.error.stack)) { message += error.stack + '\n'; }
+  if (! isNull(command.error.stack)) { message += command.error.stack + '\n'; }
   
   this.adapter.postMessage(command.channel, message);
   log_info("ReportService.errorReport end");

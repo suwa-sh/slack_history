@@ -13,6 +13,13 @@ var LoadService = function(token, channelId) {
 var LoadCommand = function(startDate, endDate) {
   notEmpty('LoadCommand.startDate', startDate);
   notEmpty('LoadCommand.endDate', endDate);
+  
+  // 前後チェック
+  if (! isAfterDate(startDate, endDate)) {
+    var startDateStr = Utilities.formatDate(startDate, 'Asia/Tokyo', 'yyyy-MM-dd');;
+    var endDateStr = Utilities.formatDate(endDate, 'Asia/Tokyo', 'yyyy-MM-dd');;
+    throw new Error('endDate は startDate より後の日付を指定してください。 startDate:' + startDateStr + ', endDate:' + endDateStr);
+  }
 
   this.startDate = startDate;
   this.endDate = endDate;

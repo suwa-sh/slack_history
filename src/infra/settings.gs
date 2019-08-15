@@ -1,3 +1,5 @@
+var DEFAULT_SHEETNAME_SETTINGS = 'settings';
+
 function settings_load(sheetName) {
   function parseCache(sheetName) {
     const DEFINED_AT_SHEET = 'Sheet';
@@ -30,7 +32,7 @@ function settings_load(sheetName) {
 
 
   var settingsSheetName = sheetName;
-  if (settingsSheetName == null || settingsSheetName === '') settingsSheetName = 'settings';
+  if (settingsSheetName == null || settingsSheetName === '') settingsSheetName = DEFAULT_SHEETNAME_SETTINGS;
   
   return parseCache(settingsSheetName);
 }
