@@ -64,10 +64,10 @@ slackの指定チャンネルでのメッセージを、google sheetsに保存�
 
 - 実行方法
   - 開始日を指定
-    - settingsシート / ondemand.start_date
+    - settingsシート / load.start_date
     - yyyy-mm-dd 形式
   - 期日を指定
-    - settingsシート / ondemand.end_date
+    - settingsシート / load.end_date
     - yyyy-mm-dd 形式
   - メニューから起動
     - メニュー / 【slack_history】 / slack -> sheets
@@ -75,13 +75,13 @@ slackの指定チャンネルでのメッセージを、google sheetsに保存�
 
 ### バッチ保存
 
-日次で、前日分を保存します。
+前回の終了日から、今回の処理前日分を保存します。
+※設定値は「開始日 = 前回の終了日」、「終了日 = 処理当日」です。
 
 - 設定方法
   - スクリプトエディタを開く
     - メニュー / スクリプトエディタ
   - トリガー設定を開く
     - メニュー / トリガーアイコン
-  - 日次で mainBatchLoad を設定
+  - 任意の繰り返し頻度で mainBatchLoad を設定
     - ![Image from Gyazo](https://i.gyazo.com/de889576cb4afb93cbc8335638312dc1.png)
-
