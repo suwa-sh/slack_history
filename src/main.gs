@@ -39,7 +39,7 @@ function mainOndemandLoad() {
   var reportCommand = new ReportCommand(reportChannel, loadResponse);
   reportService.report(reportCommand);
 
-  Browser.msgBox("処理が終了しました。");
+  SpreadsheetApp.getActive().toast("処理が終了しました。");
 }
 
 
